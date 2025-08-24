@@ -17,11 +17,6 @@ function Todo() {
     }
   }, []); // empty bcz runs only once
 
-  //set in LS
-  useEffect(() => {
-    localStorage.setItem(todoKey, JSON.stringify(tasks));
-  }, [tasks]); // whenever todos updates
-
   const addTask = () => {
     if (task.trim() === "") {
       alert("Please enter the task");
@@ -33,7 +28,8 @@ function Todo() {
       completed: false,
     };
     setTasks([...tasks, newTask]);
-    setTask(""); // reset the input field after adding the todo
+    setTask(""); // reset the input field after adding
+    localStorage.setItem(todoKey, JSON.stringify([...tasks, newTask]));
   };
 
   const toggleComplete = (id) => {
